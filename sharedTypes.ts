@@ -1,13 +1,21 @@
 type EntityWithAddress = {
-  postalCode: number;
-  city: string;
-  street: string;
+  address: {
+    postalCode: number;
+    city: string;
+    street: string;
+  };
   id: number;
 };
 
 type Restaurant = {
   name: string;
-  type: "Italian" | "Indian" | "American" | "Mexican" | "Chinese" | "French";
+  type:
+    | "Italien"
+    | "Indien"
+    | "Américain"
+    | "Méxicain"
+    | "Chinois"
+    | "Français";
 } & EntityWithAddress;
 
 type User = {
