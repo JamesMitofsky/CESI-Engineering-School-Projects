@@ -16,7 +16,7 @@ export default function NavigationBar() {
         >
           <RestaurantIcon sx={{ mr: 2 }} />
           <Typography variant="h6" color="inherit" noWrap>
-            Guide des Restaurants
+            Bistro Boulevard
           </Typography>
         </RouterLink>
         <Box sx={{ ml: "auto" }}>

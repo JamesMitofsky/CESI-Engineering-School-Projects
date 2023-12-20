@@ -32,7 +32,7 @@ function App() {
         {/* Footer */}
         <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
           <Typography variant="h6" align="center" gutterBottom>
-            Guide des Restaurants
+            Bistro Boulevard
           </Typography>
           <Typography
             variant="subtitle1"
