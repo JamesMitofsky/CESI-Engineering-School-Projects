@@ -6,10 +6,14 @@ const restaurantSchema = new Schema({
         type: String,
         required: 'Enter Name'
     },
+    genre:{
+        type: String,
+        default: 'Enter Genre'
+    },
     created_date:{
         type: Date,
         default: Date.now()
     }
-})
+});
 
-module.exports = mongoose.model('restaurant', restaurantSchema);
+module.exports = { restaurantSchema, };

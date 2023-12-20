@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-const {restaurantSchema} = require("../models/restaurantController");
+const {restaurantSchema} = require("../models/Restaurant");
 
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 
 const addNewRestaurant = (req, res) => {
-    let newRestaurant = new Restaurant (raq,body);
+    let newRestaurant = new Restaurant (req,body);
     newRestaurant.save((err,answer) =>{
         if(err){(err,answer)}
         else{
@@ -22,7 +22,4 @@ const getAllRestaurants = (req, res) => {
     })
 }
 
-module.exports = {
-    addNewRestaurant,
-    getAllRestaurants,
-};
+module.exports = { addNewRestaurant, getAllRestaurants};
