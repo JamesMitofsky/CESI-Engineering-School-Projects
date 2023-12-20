@@ -9,7 +9,7 @@ type EntityWithAddress = {
 
 type Restaurant = {
   name: string;
-  type:
+  genre:
     | "Italien"
     | "Indien"
     | "Américain"
