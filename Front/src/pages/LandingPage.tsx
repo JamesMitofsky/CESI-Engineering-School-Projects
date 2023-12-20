@@ -7,18 +7,22 @@ export default function LandingPage() {
   const restaurants: Restaurant[] = [
     {
       name: "Restaurant 1",
-      type: "Italian",
-      postalCode: 12345,
-      city: "New York",
-      street: "123 Main St",
+      type: "Italien",
+      address: {
+        postalCode: 12345,
+        city: "New York",
+        street: "123 Main St",
+      },
       id: 1,
     },
     {
       name: "Restaurant 2",
-      type: "Chinese",
-      postalCode: 67890,
-      city: "San Francisco",
-      street: "456 Oak St",
+      type: "Chinois",
+      address: {
+        postalCode: 67890,
+        city: "San Francisco",
+        street: "456 Oak St",
+      },
       id: 2,
     },
   ];

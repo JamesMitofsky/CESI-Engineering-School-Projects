@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 
@@ -19,6 +19,11 @@ export default function NavigationBar() {
             Guide des Restaurants
           </Typography>
         </RouterLink>
+        <Box sx={{ ml: "auto" }}>
+          <RouterLink to="/connecter" style={{ color: "inherit" }}>
+            <Button color="inherit">Connexion</Button>
+          </RouterLink>
+        </Box>
       </Toolbar>
     </AppBar>
   );

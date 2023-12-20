@@ -15,7 +15,7 @@ export default function RestaurantPreviewtile({
 }: {
   restaurant: Restaurant;
 }) {
-  const { name, type, street, id } = restaurant;
+  const { name, type, address, id } = restaurant;
 
   return (
     <Grid item key={name} xs={12} sm={6} md={4}>
@@ -40,8 +40,7 @@ export default function RestaurantPreviewtile({
           </Typography>
           <Typography>{type}</Typography>
           <Typography>
-            {street}
-            {street}
+            {address.street}, {address.city} {address.postalCode}
           </Typography>
         </CardContent>
         <CardActions>
