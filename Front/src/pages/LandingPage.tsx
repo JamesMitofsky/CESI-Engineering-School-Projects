@@ -1,31 +1,9 @@
-import { Box, Container, Typography, Stack, Button, Grid } from "@mui/material";
+import { Box, Container, Typography, Stack, Button } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import RestaurantPreviewtile from "../components/RestaurantPreviewTile";
-import { Restaurant } from "../../../sharedTypes";
+
+import RestaurantsList from "../components/groups/RestaurantsList";
 
 export default function LandingPage() {
-  const restaurants: Restaurant[] = [
-    {
-      name: "Restaurant 1",
-      type: "Italien",
-      address: {
-        postalCode: 12345,
-        city: "New York",
-        street: "123 Main St",
-      },
-      id: 1,
-    },
-    {
-      name: "Restaurant 2",
-      type: "Chinois",
-      address: {
-        postalCode: 67890,
-        city: "San Francisco",
-        street: "456 Oak St",
-      },
-      id: 2,
-    },
-  ];
   return (
     <>
       <Box
@@ -71,12 +49,7 @@ export default function LandingPage() {
         </Container>
       </Box>
       <Container sx={{ py: 8 }} maxWidth="md">
-        {/* End hero unit */}
-        <Grid container spacing={4}>
-          {restaurants.map((restaurant) => (
-            <RestaurantPreviewtile restaurant={restaurant} />
-          ))}
-        </Grid>
+        <RestaurantsList />
       </Container>
     </>
   );

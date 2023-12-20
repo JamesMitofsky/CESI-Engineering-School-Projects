@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 
 const RestaurantSchema = new mongoose.Schema({
   name: String,
+  image: String,
   genre: {
     type: String,
     enum: ["Italien", "Indien", "Américain", "Méxicain", "Chinois", "Français"],

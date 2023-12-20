@@ -15,11 +15,13 @@ export default function RestaurantPreviewtile({
 }: {
   restaurant: Restaurant;
 }) {
-  const { name, type, address, id } = restaurant;
+  // const { name, genre, address, id } = restaurant;
+
+  console.log(restaurant);
 
   return (
-    <Grid item key={name} xs={12} sm={6} md={4}>
-      <Card
+    <Grid item key={restaurant.name} xs={12} sm={6} md={4}>
+      {/* <Card
         sx={{
           height: "100%",
           display: "flex",
@@ -38,7 +40,7 @@ export default function RestaurantPreviewtile({
           <Typography gutterBottom variant="h5" component="h2">
             {name}
           </Typography>
-          <Typography>{type}</Typography>
+          <Typography>{genre}</Typography>
           <Typography>
             {address.street}, {address.city} {address.postalCode}
           </Typography>
@@ -49,7 +51,7 @@ export default function RestaurantPreviewtile({
           </Button>
           <Button size="small">Edit</Button>
         </CardActions>
-      </Card>
+      </Card> */}
     </Grid>
   );
 }
