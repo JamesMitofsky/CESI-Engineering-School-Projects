@@ -4,7 +4,7 @@ type EntityWithAddress = {
     city: string;
     street: string;
   };
-  id: number;
+  _id: number;
 };
 
 type Restaurant = {
