@@ -1,7 +1,8 @@
+const mongoose = require("mongoose");
 const AddressSchema = new mongoose.Schema({
   postalCode: Number,
   city: String,
   street: String,
 });
 
-export { AddressSchema };
+module.exports = { AddressSchema };

@@ -1,4 +1,4 @@
-import { AddressSchema } from "./Adresse";
+const { AddressSchema } = require("./Adresse");
 
 const mongoose = require("mongoose");
 
