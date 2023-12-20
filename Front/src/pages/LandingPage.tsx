@@ -1,26 +1,26 @@
-import {
-  Box,
-  Container,
-  Typography,
-  Stack,
-  Button,
-  Grid,
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-} from "@mui/material";
+import { Box, Container, Typography, Stack, Button, Grid } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import RestaurantPreviewtile from "../components/RestaurantPreviewTile";
+import { Restaurant } from "../../../sharedTypes";
 
 export default function LandingPage() {
-  const restaurants = [
+  const restaurants: Restaurant[] = [
     {
       name: "Restaurant 1",
-      foodType: "Italian",
-      address: "123 Main St",
+      type: "Italian",
+      postalCode: 12345,
+      city: "New York",
+      street: "123 Main St",
       id: 1,
     },
-    { name: "Restaurant 2", foodType: "Chinese", address: "456 Oak St", id: 2 },
+    {
+      name: "Restaurant 2",
+      type: "Chinese",
+      postalCode: 67890,
+      city: "San Francisco",
+      street: "456 Oak St",
+      id: 2,
+    },
   ];
   return (
     <>
@@ -70,41 +70,7 @@ export default function LandingPage() {
         {/* End hero unit */}
         <Grid container spacing={4}>
           {restaurants.map((restaurant) => (
-            <Grid item key={restaurant.name} xs={12} sm={6} md={4}>
-              <Card
-                sx={{
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <CardMedia
-                  component="div"
-                  sx={{
-                    // 16:9
-                    pt: "56.25%",
-                  }}
-                  image="https://source.unsplash.com/random?restaurant"
-                />
-                <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {restaurant.name}
-                  </Typography>
-                  <Typography>{restaurant.foodType}</Typography>
-                  <Typography>{restaurant.address}</Typography>
-                </CardContent>
-                <CardActions>
-                  <Button
-                    component={RouterLink}
-                    to={`restaurant/${restaurant.id}`}
-                    size="small"
-                  >
-                    View
-                  </Button>
-                  <Button size="small">Edit</Button>
-                </CardActions>
-              </Card>
-            </Grid>
+            <RestaurantPreviewtile restaurant={restaurant} />
           ))}
         </Grid>
       </Container>

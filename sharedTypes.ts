@@ -2,6 +2,7 @@ type EntityWithAddress = {
   postalCode: number;
   city: string;
   street: string;
+  id: number;
 };
 
 type Restaurant = {
@@ -15,4 +16,4 @@ type User = {
   biography: string;
 } & EntityWithAddress;
 
-export { Restaurant, User };
+export type { Restaurant, User };
