@@ -3,23 +3,19 @@ const {restaurantSchema} = require("../models/Restaurant");
 
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 
+
 const addNewRestaurant = (req, res) => {
-    let newRestaurant = new Restaurant (req,body);
-    newRestaurant.save((err,answer) =>{
-        if(err){(err,answer)}
-        else{
-            res.send(answer);
-        }
-    })
+    let newRestaurant = new Restaurant (req.body);
+    newRestaurant.save()
+        .then(answer => res.send(answer))
+        .catch(err => res.status(500).send(err));
 }
 
 const getAllRestaurants = (req, res) => {
-    Restaurant.find({}, (err,answer) => {
-        if(err){res.send(err)}
-        else{
-            res.send(answer);
-        }
-    })
-}
+    Restaurant.find()
+        .then(answer => res.send(answer))
+        .catch(err => res.status(500).send(err));
+};
+
 
 module.exports = { addNewRestaurant, getAllRestaurants};
