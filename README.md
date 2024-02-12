@@ -1,3 +1,3 @@
-# CESI Project
+# CESI Engineering School Projects
 
-Anthology of projects done during my time at the French engineering school, CESI.
+Warehouse of projects that were done during my time at the French engineering school, [CESI](https://www.cesi.fr/).
