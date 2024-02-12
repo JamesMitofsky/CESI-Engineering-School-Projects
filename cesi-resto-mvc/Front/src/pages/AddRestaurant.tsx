@@ -7,12 +7,15 @@ import RestaurantIcon from "@mui/icons-material/Restaurant";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function AddRestaurant() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const formattedData = {
       name: data.get("name"),
       image: data.get("image"),
       genre: data.get("genre"),
@@ -21,7 +24,22 @@ export default function AddRestaurant() {
         city: data.get("city"),
         street: data.get("street"),
       },
+    };
+
+    const response = await fetch("http://localhost:8080/restaurant", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formattedData),
     });
+
+    if (!response.ok) {
+      console.error("Failed to post restaurant", response);
+    } else {
+      console.log("Restaurant posted successfully");
+      navigate("/");
+    }
   };
 
   return (

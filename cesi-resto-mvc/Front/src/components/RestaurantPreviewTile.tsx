@@ -58,10 +58,9 @@ export default function RestaurantPreviewtile({
               to={`restaurant/${restaurant._id}`}
               size="small"
             >
-              View
+              Regarder davantage
             </Button>
           )}
-          <Button size="small">Edit</Button>
         </CardActions>
       </Card>
     </Grid>
