@@ -10,9 +10,10 @@ interface IVoiture {
 //* 2 - Définissez une classe 'Voiture' qui implémente l'interface 'IVoiture'.
 
 class Voiture implements IVoiture {
-  marque;
-  kilometrage;
-  constructor(marque, kilometrage) {
+  marque: string;
+  kilometrage: number;
+  test;
+  constructor(marque: string, kilometrage: number) {
     this.marque = marque;
     this.kilometrage = kilometrage;
   }
