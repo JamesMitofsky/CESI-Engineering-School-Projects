@@ -1,0 +1,25 @@
+# Dépendances
+/node_modules/
+
+# Fichiers de build
+/build/
+/dist/
+
+# Fichiers de correction 
+/correction.tsx
+
+# Fichiers de l'éditeur
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Fichiers système d'exploitation
+.DS_Store
+Thumbs.db
+
+# Fichiers de logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
