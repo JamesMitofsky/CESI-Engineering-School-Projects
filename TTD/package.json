@@ -1,0 +1,17 @@
+{
+  "name": "ttd",
+  "version": "1.0.0",
+  "description": "Test Driven Development practice for a course on the subject in mid-March.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "James Mitofsky",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.4.3"
+  }
+}
