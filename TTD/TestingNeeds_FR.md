@@ -1,0 +1,8 @@
+| ID  | Fonctionnalité               | Description                                                            | Résultat escompté                                                                                        |
+| --- | ---------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| 1   | Initialisation de la voiture | Initialise un objet voiture avec les paramètres par défaut.            | L'objet voiture est créé sans passagers et avec des paramètres par défaut corrects.                      |
+| 2   | Gérer la capacité            | Gérer la capacité de la voiture en ajoutant des passagers.             | La voiture devrait ajouter des passagers jusqu'à ce que la capacité soit atteinte (8 passagers maximum). |
+| 3   | Enregistrer une voiture      | Enregistrer une voiture pour une destination spécifique.               | La voiture doit être enregistrée avec succès pour une destination sans conflit d'itinéraires.            |
+| 4   | Enregistrer un passager      | Permet aux passagers de s'enregistrer pour une destination spécifique. | Le passager doit s'enregistrer avec succès pour une destination spécifique.                              |
+| 5   | Identification de la voiture | Identifier une voiture par sa plaque d'immatriculation.                | La voiture doit être correctement identifiée par sa plaque d'immatriculation.                            |
+| 6   | Caractériser le voyage       | Caractériser un voyage avec les villes de départ et de destination.    | Le voyage doit être correctement caractérisé par les villes de départ et de destination.                 |
