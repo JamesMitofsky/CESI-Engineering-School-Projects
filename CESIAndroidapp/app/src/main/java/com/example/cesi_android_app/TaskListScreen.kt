@@ -8,9 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 
 @Composable
-fun TaskListScreen(navController: NavController) {
+fun TaskListScreen(navController: NavController, tasks: List<String>) {
     Column() {
         Text(text = "Tasks", style = MaterialTheme.typography.headlineLarge)
+
+        tasks.forEach { task ->
+            Text(text = task, style = MaterialTheme.typography.bodyMedium)
+        }
+
         Button(onClick = { navController.navigate(Screen.AddTaskScreen.route) }) {
             Text("Add Task")
         }

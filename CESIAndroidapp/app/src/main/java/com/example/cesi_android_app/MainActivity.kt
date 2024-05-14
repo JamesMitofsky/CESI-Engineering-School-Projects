@@ -8,6 +8,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.cesi_android_app.ui.theme.CESIAndroidappTheme
@@ -23,12 +27,16 @@ sealed class Screen(val route: String) {
 @Composable
 fun AppNavigator() {
     val navController = rememberNavController()
+    var tasks by remember { mutableStateOf(listOf<String>()) }
+
     NavHost(navController = navController, startDestination = Screen.TaskListScreen.route) {
         composable(Screen.TaskListScreen.route) {
-            TaskListScreen(navController = navController)
+            TaskListScreen(navController = navController, tasks = tasks)
         }
         composable(Screen.AddTaskScreen.route) {
-            AddTaskScreen(navController = navController)
+            AddTaskScreen(navController = navController, onTaskAdded = { task ->
+                tasks = tasks + task
+            })
         }
     }
 }

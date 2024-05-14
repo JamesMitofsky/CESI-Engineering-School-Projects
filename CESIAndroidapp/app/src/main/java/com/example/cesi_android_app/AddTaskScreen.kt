@@ -1,20 +1,39 @@
 package com.example.cesi_android_app
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.navigation.NavController
 
 @Composable
-fun AddTaskScreen(navController: NavController) {
+fun AddTaskScreen(navController: NavController, onTaskAdded: (String) -> Unit) {
+    var taskInput by remember { mutableStateOf("") }
+
     Column(){
         Text(text="Add Task", style = MaterialTheme.typography.headlineLarge)
+
+        OutlinedTextField(
+            value = taskInput,
+            onValueChange = { taskInput = it },
+            label = { Text("Task") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+        )
+
+        Button(onClick = {
+            onTaskAdded(taskInput)
+            taskInput = ""
+            navController.navigate(Screen.TaskListScreen.route)
+        }) {
+            Text("Submit Task")
+        }
 
         Button(onClick = { navController.navigate(Screen.TaskListScreen.route) }) {
             Text("View existing tasks")
         }
     }
-
 }
