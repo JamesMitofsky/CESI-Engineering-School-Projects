@@ -11,8 +11,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,48 +32,52 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CESIAndroidappTheme {
-                LandingPage()
+                QuarterOfScreenCard("title", "subtitle")
             }
         }
     }
 }
 
 
-//@Composable
-//fun QuarterOfScreenCard(
-//    title: String,
-//    subtitle: String,
-//    modifier: Modifier = Modifier,
-//    isDark: Boolean? = false,
-//) {
-//    Card(
-//        modifier = modifier
-//            .fillMaxWidth()
-//            .height(200.dp),
-//        elevation = 4.dp,
-//        backgroundColor = if (isDark == true) Color.DarkGray else Color.White
-//    ) {
-//        Column(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(16.dp)
-//        ) {
-//            Text(
-//                text = title,
-//                style = MaterialTheme.typography.h6,
-//            )
-//            Spacer(
-//                modifier = Modifier.height(
-//                    8.dp
-//                )
-//            )
-//            Text(
-//                text = subtitle,
-//                style = MaterialTheme.typography.body2,
-//            )
-//        }
-//    }
-//}
+// based on these instructions: https://developer.android.com/codelabs/basic-android-kotlin-compose-composables-practice-problems#3
+@Composable
+fun QuarterOfScreenCard(
+    title: String,
+    subtitle: String,
+    modifier: Modifier = Modifier,
+//    isDark: Boolean = false,
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(200.dp),
+        // inspired by this: https://stackoverflow.com/a/77229005/5395435
+        colors = CardDefaults.cardColors(
+            containerColor = Color.DarkGray,
+            contentColor = Color.White
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.headlineSmall,
+            )
+            Spacer(
+                modifier = Modifier.height(
+                    8.dp
+                )
+            )
+            Text(
+                text = subtitle,
+                style = MaterialTheme.typography.bodySmall,
+            )
+        }
+    }
+}
 
 
 @Composable
