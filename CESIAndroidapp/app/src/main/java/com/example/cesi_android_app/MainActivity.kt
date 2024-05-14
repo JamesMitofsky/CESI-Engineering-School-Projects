@@ -39,22 +39,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CESIAndroidappTheme {
-                Column(
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    Row(
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        QuarterOfScreenCard("1-changed", "subtitle", Modifier.weight(1f))
-                        QuarterOfScreenCard("2", "subtitle", Modifier.weight(1f))
-                    }
-                    Row(
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        QuarterOfScreenCard("3-changed", "subtitle", Modifier.weight(1f))
-                        QuarterOfScreenCard("4", "subtitle", Modifier.weight(1f))
-                    }
-                }
+                val card1 = CardData("Lorem ipsum", "Dolor sit amet")
+                val card2 = CardData("Consectetur adipiscing", "Elit, sed do eiusmod")
+                val card3 = CardData("Tempor incididunt", "Ut labore et dolore")
+                val card4 = CardData("Magna aliqua", "Ut enim ad minim veniam")
+
+                AllCards(card1, card2, card3, card4)
             }
         }
     }
@@ -62,6 +52,31 @@ class MainActivity : ComponentActivity() {
 
 
 // based on these instructions: https://developer.android.com/codelabs/basic-android-kotlin-compose-composables-practice-problems#3
+
+data class CardData(
+    val title: String,
+    val subtitle: String
+)
+
+@Composable
+fun AllCards(card1: CardData, card2: CardData, card3: CardData, card4: CardData) {
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Row(
+            modifier = Modifier.weight(1f)
+        ) {
+            QuarterOfScreenCard(card1.title, card1.subtitle, Modifier.weight(1f))
+            QuarterOfScreenCard(card2.title, card2.subtitle, Modifier.weight(1f))
+        }
+        Row(
+            modifier = Modifier.weight(1f)
+        ) {
+            QuarterOfScreenCard(card3.title, card3.subtitle, Modifier.weight(1f))
+            QuarterOfScreenCard(card4.title, card4.subtitle, Modifier.weight(1f))
+        }
+    }
+}
 @Composable
 fun QuarterOfScreenCard(
     title: String,
