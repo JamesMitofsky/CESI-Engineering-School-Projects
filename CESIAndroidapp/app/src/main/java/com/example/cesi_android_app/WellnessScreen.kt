@@ -7,12 +7,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun WellnessScreen(modifier: Modifier = Modifier) {
-    val count = remember { mutableIntStateOf(0) }
+    val count = rememberSaveable { mutableIntStateOf(0) }
     Column(modifier = modifier) {
         Text(
             text = "You've had ${count.value} glasses.",
