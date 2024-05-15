@@ -5,9 +5,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +24,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import java.util.UUID
 
@@ -48,26 +51,40 @@ fun TaskListScreen(navigateToAddTaskScreen: () -> Unit, tasks: List<Task>, onTas
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(innerPadding),
+                .padding(innerPadding).padding(top = 16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            // internal content
-
             tasks.forEach { task ->
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(text = task.description, style = MaterialTheme.typography.bodyMedium)
-                    Checkbox(
-                        checked = task.completed,
-                        onCheckedChange = { isChecked -> onTaskStatusChange(task.id, isChecked) },
-                        colors = CheckboxDefaults.colors(
-                            checkmarkColor = colorScheme.onSurface,
-                            uncheckedColor = colorScheme.onSurface,
-                            checkedColor = colorScheme.primary
-                        )
-                    )
+                    Card(
+                        shape = RoundedCornerShape(4.dp),
+                        modifier = Modifier.padding(8.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = task.description,
+                                style = MaterialTheme.typography.bodyMedium,
+                                modifier = Modifier.weight(1f)
+                            )
+                            Checkbox(
+                                checked = task.completed,
+                                onCheckedChange = { isChecked -> onTaskStatusChange(task.id, isChecked) },
+                                colors = CheckboxDefaults.colors(
+                                    checkmarkColor = colorScheme.onSurface,
+                                    uncheckedColor = colorScheme.onSurface,
+                                    checkedColor = colorScheme.primary
+                                )
+                            )
+                        }
+                    }
                 }
             }
         }
