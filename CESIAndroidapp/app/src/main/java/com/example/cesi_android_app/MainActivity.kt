@@ -27,15 +27,24 @@ sealed class Screen(val route: String) {
 
 data class Task(val id: UUID, val description: String, var completed: Boolean)
 
-
 @Composable
 fun AppNavigator() {
     val navController = rememberNavController()
     var tasks by remember { mutableStateOf(listOf<Task>()) }
 
+    fun onTaskStatusChange(taskId: UUID, isChecked: Boolean) {
+        tasks = tasks.map { task ->
+            if (task.id == taskId) {
+                task.copy(completed = isChecked)
+            } else {
+                task
+            }
+        }
+    }
+
     NavHost(navController, startDestination = Screen.TaskListScreen.route) {
         composable(Screen.TaskListScreen.route) {
-            TaskListScreen(navigateToAddTaskScreen = { navController.navigate(Screen.AddTaskScreen.route) }, tasks)
+            TaskListScreen(navigateToAddTaskScreen = { navController.navigate(Screen.AddTaskScreen.route) }, tasks, {taskId, isChecked -> onTaskStatusChange(taskId, isChecked)})
         }
         composable(Screen.AddTaskScreen.route) {
             AddTaskScreen(navigateToTaskListScreen = { navController.navigate(Screen.TaskListScreen.route) }, onTaskAdded = { newTask ->

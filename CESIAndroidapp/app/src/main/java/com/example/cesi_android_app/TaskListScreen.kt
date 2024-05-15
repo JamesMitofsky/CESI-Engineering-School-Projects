@@ -11,9 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
+import java.util.UUID
 
 @Composable
-fun TaskListScreen(navigateToAddTaskScreen: () -> Unit, tasks: List<Task>) {
+fun TaskListScreen(navigateToAddTaskScreen: () -> Unit, tasks: List<Task>, onTaskStatusChange: (taskId: UUID, isChecked: Boolean) -> Unit) {
     Column {
         Text(text = "Task List", style = MaterialTheme.typography.headlineLarge)
 
@@ -25,7 +26,7 @@ fun TaskListScreen(navigateToAddTaskScreen: () -> Unit, tasks: List<Task>) {
                 Text(text = task.description, style = MaterialTheme.typography.bodyMedium)
                 Checkbox(
                     checked = task.completed,
-                    onCheckedChange = { task.completed = it },
+                    onCheckedChange = { isChecked -> onTaskStatusChange(task.id, isChecked) },
                     colors = CheckboxDefaults.colors(
                         checkmarkColor = MaterialTheme.colorScheme.onSurface,
                         uncheckedColor = MaterialTheme.colorScheme.onSurface,
