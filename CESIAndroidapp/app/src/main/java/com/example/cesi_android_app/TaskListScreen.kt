@@ -9,7 +9,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 
 @Composable
 fun TaskListScreen(navigateToAddTaskScreen: () -> Unit, tasks: List<Task>) {
@@ -22,7 +23,15 @@ fun TaskListScreen(navigateToAddTaskScreen: () -> Unit, tasks: List<Task>) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(text = task.description, style = MaterialTheme.typography.bodyMedium)
-                Text(text = task.completed.toString(), style = MaterialTheme.typography.bodyMedium)
+                Checkbox(
+                    checked = task.completed,
+                    onCheckedChange = { task.completed = it },
+                    colors = CheckboxDefaults.colors(
+                        checkmarkColor = MaterialTheme.colorScheme.onSurface,
+                        uncheckedColor = MaterialTheme.colorScheme.onSurface,
+                        checkedColor = MaterialTheme.colorScheme.primary
+                    )
+                )
             }
         }
 

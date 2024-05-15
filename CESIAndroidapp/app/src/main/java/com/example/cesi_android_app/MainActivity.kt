@@ -25,7 +25,7 @@ sealed class Screen(val route: String) {
     object AddTaskScreen : Screen("addTaskScreen")
 }
 
-data class Task(val id: UUID, val description: String, val completed: Boolean)
+data class Task(val id: UUID, val description: String, var completed: Boolean)
 
 
 @Composable
