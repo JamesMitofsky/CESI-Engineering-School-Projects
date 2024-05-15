@@ -60,15 +60,18 @@ fun TaskListScreen(navigateToAddTaskScreen: () -> Unit, tasks: List<Task>, onTas
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             tasks.forEach { task ->
-                Row(modifier = if (tasks.indexOf(task) == 0) {
-                        Modifier
+                Row(
+                    modifier = when (tasks.indexOf(task)) {
+                        0 -> Modifier
                             .fillMaxWidth()
                             .padding(top = 16.dp)
-                    } else {
-                        Modifier.fillMaxWidth()
+                        tasks.size - 1 -> Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 140.dp)
+                        else -> Modifier.fillMaxWidth()
                     },
                     horizontalArrangement = Arrangement.SpaceBetween
-                ) {
+                ){
                     Card(
                         shape = RoundedCornerShape(4.dp),
                         modifier = Modifier.padding(8.dp)
