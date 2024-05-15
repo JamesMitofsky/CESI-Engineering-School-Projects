@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             CESIAndroidappTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize().padding(top = 45.dp),
+                    modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
                     AppNavigator()
