@@ -1,5 +1,6 @@
 package com.example.cesi_android_app
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -35,7 +36,12 @@ import java.util.UUID
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TaskListScreen(navigateToAddTaskScreen: () -> Unit, tasks: List<Task>, onTaskStatusChange: (taskId: UUID, isChecked: Boolean) -> Unit) {
+fun TaskListScreen(
+    navigateToAddTaskScreen: () -> Unit,
+    tasks: List<Task>,
+    onTaskStatusChange: (taskId: UUID, isChecked: Boolean) -> Unit,
+    openTaskOptions: (taskId: UUID) -> Unit
+) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -81,7 +87,9 @@ fun TaskListScreen(navigateToAddTaskScreen: () -> Unit, tasks: List<Task>, onTas
                 ){
                     Card(
                         shape = RoundedCornerShape(4.dp),
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .clickable(onClick = { openTaskOptions(task.id) }),
                     ) {
                         Row(
                             modifier = Modifier
