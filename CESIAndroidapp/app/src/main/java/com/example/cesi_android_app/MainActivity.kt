@@ -1,4 +1,5 @@
 package com.example.cesi_android_app
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,10 +19,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.AndroidViewModel
 import com.example.cesi_android_app.ui.theme.CESIAndroidappTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.room.ColumnInfo
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Entity
+import androidx.room.Insert
+import androidx.room.PrimaryKey
+import androidx.room.Query
+import androidx.room.Room
 import java.util.UUID
 
 sealed class Screen(val route: String) {
@@ -29,14 +39,23 @@ sealed class Screen(val route: String) {
     object AddTaskScreen : Screen("addTaskScreen")
 }
 
-data class Task(val id: UUID, val description: String, var completed: Boolean)
+class TaskViewModel(application: Application) : AndroidViewModel(application) {
+    val db = Room.databaseBuilder(
+        application,
+        AppDatabase::class.java,
+        "tasks-database"
+    ).build()
+
+    val taskDao = db.taskDao()
+}
 
 @Composable
-fun AppNavigator() {
+fun AppNavigator(taskViewModel: TaskViewModel) {
     val navController = rememberNavController()
-    var tasks by remember { mutableStateOf(listOf<Task>()) }
 
-    // when the value is not null, show the dialog
+    // Start the database
+    var tasks: List<Task> = taskViewModel.taskDao.getAll()
+
     val idOfTaskToShowDialogFor = remember { mutableStateOf<UUID?>(null)}
 
     fun onTaskStatusChange(taskId: UUID, isChecked: Boolean) {
@@ -75,7 +94,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AppNavigator()
+                    AppNavigator(taskViewModel = TaskViewModel(application))
                 }
             }
         }

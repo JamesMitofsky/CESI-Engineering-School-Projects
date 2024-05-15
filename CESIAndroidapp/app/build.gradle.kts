@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
+    // Kotlin Symbol Processing (fait fonctionner les annotations)
+    id("com.google.devtools.ksp") version "1.9.0-1.0.13"
 }
 
 android {
@@ -59,4 +62,13 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
+
+    val room_version = "2.6.1"
+    // Room
+    implementation("androidx.room:room-runtime:$room_version")
+    // Extensions pour Kotlin et support des coroutines
+    implementation("androidx.room:room-ktx:$room_version")
+    // Annotations
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
 }
