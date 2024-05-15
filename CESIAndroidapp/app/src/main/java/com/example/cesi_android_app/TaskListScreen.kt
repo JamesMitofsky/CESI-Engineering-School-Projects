@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 
 @Composable
-fun TaskListScreen(navController: NavController, tasks: List<Task>) {
+fun TaskListScreen(navigateToAddTaskScreen: () -> Unit, tasks: List<Task>) {
     Column {
-        Text(text = "Task List")
+        Text(text = "Task List", style = MaterialTheme.typography.headlineLarge)
 
         tasks.forEach { task ->
             Row(
@@ -26,7 +26,7 @@ fun TaskListScreen(navController: NavController, tasks: List<Task>) {
             }
         }
 
-        Button(onClick = { navController.navigate(Screen.AddTaskScreen.route) }) {
+        Button(onClick = navigateToAddTaskScreen) {
             Text("Add Task")
         }
     }

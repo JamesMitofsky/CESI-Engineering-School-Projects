@@ -33,12 +33,12 @@ fun AppNavigator() {
     val navController = rememberNavController()
     var tasks by remember { mutableStateOf(listOf<Task>()) }
 
-    NavHost(navController = navController, startDestination = Screen.TaskListScreen.route) {
+    NavHost(navController, startDestination = Screen.TaskListScreen.route) {
         composable(Screen.TaskListScreen.route) {
-            TaskListScreen(navController = navController, tasks = tasks)
+            TaskListScreen(navigateToAddTaskScreen = { navController.navigate(Screen.AddTaskScreen.route) }, tasks)
         }
         composable(Screen.AddTaskScreen.route) {
-            AddTaskScreen(navController = navController, onTaskAdded = { newTask ->
+            AddTaskScreen(navigateToTaskListScreen = { navController.navigate(Screen.TaskListScreen.route) }, onTaskAdded = { newTask ->
                 tasks = tasks + newTask
             })
         }

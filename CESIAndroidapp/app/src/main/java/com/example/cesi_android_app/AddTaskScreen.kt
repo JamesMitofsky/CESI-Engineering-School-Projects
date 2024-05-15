@@ -12,7 +12,7 @@ import androidx.navigation.NavController
 import java.util.UUID
 
 @Composable
-fun AddTaskScreen(navController: NavController, onTaskAdded: (Task) -> Unit) {
+fun AddTaskScreen(navigateToTaskListScreen: () -> Unit, onTaskAdded: (Task) -> Unit) {
     var taskInput by remember { mutableStateOf("") }
 
     Column(){
@@ -28,12 +28,12 @@ fun AddTaskScreen(navController: NavController, onTaskAdded: (Task) -> Unit) {
         Button(onClick = {
             onTaskAdded(Task(id = UUID.randomUUID(), description = taskInput, completed = false))
             taskInput = ""
-            navController.navigate(Screen.TaskListScreen.route)
+            navigateToTaskListScreen()
         }) {
             Text("Submit Task")
         }
 
-        Button(onClick = { navController.navigate(Screen.TaskListScreen.route) }) {
+        Button(onClick = navigateToTaskListScreen) {
             Text("View existing tasks")
         }
     }
