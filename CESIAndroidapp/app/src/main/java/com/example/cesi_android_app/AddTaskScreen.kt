@@ -9,9 +9,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.navigation.NavController
+import java.util.UUID
 
 @Composable
-fun AddTaskScreen(navController: NavController, onTaskAdded: (String) -> Unit) {
+fun AddTaskScreen(navController: NavController, onTaskAdded: (Task) -> Unit) {
     var taskInput by remember { mutableStateOf("") }
 
     Column(){
@@ -25,7 +26,7 @@ fun AddTaskScreen(navController: NavController, onTaskAdded: (String) -> Unit) {
         )
 
         Button(onClick = {
-            onTaskAdded(taskInput)
+            onTaskAdded(Task(id = UUID.randomUUID(), description = taskInput, completed = false))
             taskInput = ""
             navController.navigate(Screen.TaskListScreen.route)
         }) {

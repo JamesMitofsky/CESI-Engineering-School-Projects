@@ -18,24 +18,28 @@ import com.example.cesi_android_app.ui.theme.CESIAndroidappTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import java.util.UUID
 
 sealed class Screen(val route: String) {
     object TaskListScreen : Screen("taskListScreen")
     object AddTaskScreen : Screen("addTaskScreen")
 }
 
+data class Task(val id: UUID, val description: String, val completed: Boolean)
+
+
 @Composable
 fun AppNavigator() {
     val navController = rememberNavController()
-    var tasks by remember { mutableStateOf(listOf<String>()) }
+    var tasks by remember { mutableStateOf(listOf<Task>()) }
 
     NavHost(navController = navController, startDestination = Screen.TaskListScreen.route) {
         composable(Screen.TaskListScreen.route) {
             TaskListScreen(navController = navController, tasks = tasks)
         }
         composable(Screen.AddTaskScreen.route) {
-            AddTaskScreen(navController = navController, onTaskAdded = { task ->
-                tasks = tasks + task
+            AddTaskScreen(navController = navController, onTaskAdded = { newTask ->
+                tasks = tasks + newTask
             })
         }
     }
