@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import crypto from "crypto";
+import { Spinner } from "@/components/spinner";
 
 function hashName(name: string, itemCount: number): number {
   const hash = crypto.createHash("md5").update(name).digest("hex");
@@ -9,13 +10,16 @@ function hashName(name: string, itemCount: number): number {
   return numericHash % itemCount;
 }
 
+const BASE_URL = "https://pokeapi.co/api/v2/pokemon";
+
 export default function Home() {
   const [name, setName] = useState("");
   const [pokemonImageUrl, setPokemonImageUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
-    const baseUrl = "https://pokeapi.co/api/v2/pokemon";
-    const urlWithHash = `${baseUrl}/${hashName(name, 850)}`;
+    setIsLoading(true);
+    const urlWithHash = `${BASE_URL}/${hashName(name, 850)}`;
 
     console.log(name, urlWithHash);
 
@@ -24,8 +28,7 @@ export default function Home() {
       .catch((error) => console.error("Error fetching data:", error));
 
     setPokemonImageUrl(res.sprites.front_default);
-
-    // console.log(res);
+    setIsLoading(false);
   };
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,14 +38,16 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className="text-center text-4xl font-bold">Quel Pokémon es-tu ?</h1>
-      {pokemonImageUrl && (
+      {isLoading ? (
+        <Spinner />
+      ) : pokemonImageUrl ? (
         <Image
           src={pokemonImageUrl}
           alt="Your Image Description"
           width={500}
           height={300}
         />
-      )}
+      ) : null}
       <input
         type="text"
         placeholder="Votre prénom"
