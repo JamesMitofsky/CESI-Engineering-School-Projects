@@ -4,10 +4,21 @@ import { useState } from "react";
 import crypto from "crypto";
 import { Spinner } from "@/components/spinner";
 
-function hashName(name: string, itemCount: number): number {
-  const hash = crypto.createHash("md5").update(name).digest("hex");
+function hashName(name: string, limit: number): number {
+  // Use MD5 hashing
+  const hash = crypto
+    .createHash("md5")
+    // Update the hash object with the provided name string
+    .update(name)
+    // Convert the hash to a hexadecimal string so it can be parsed
+    .digest("hex");
+
+  // Convert the hexadecimal hash string to a numeric value
   const numericHash = parseInt(hash, 16);
-  return numericHash % itemCount;
+
+  // Return the remainder of dividing the numeric hash by itemCount
+  // This ensures the result is within the range [0, itemCount - 1]
+  return numericHash % limit;
 }
 
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon";
