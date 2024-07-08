@@ -2,14 +2,30 @@
 import Image from "next/image";
 import { useState } from "react";
 
+const hashName = (name: string) => {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return hash;
+};
+
 export default function Home() {
   const [name, setName] = useState("");
   const [pokemonImageUrl, setPokemonImageUrl] = useState("");
 
-  const handleNameSubmit = () => {
-    const baseApiUrl = "https://pokeapi.co/api/v2/pokemon/";
+  const handleSubmit = async () => {
+    const baseUrl = "https://pokeapi.co/api/v2/pokemon";
+    // const urlBasedOnName = `${baseUrl}${hashName(name)}`;
+    const urlBasedOnName = `${baseUrl}/123`;
 
-    // submit name to the server
+    const res = await fetch(urlBasedOnName)
+      .then((response) => response.json())
+      .catch((error) => console.error("Error fetching data:", error));
+
+    setPokemonImageUrl(res.sprites.front_default);
+
+    console.log(res);
   };
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +52,7 @@ export default function Home() {
       />
       <button
         className="mt-4 p-2 bg-blue-500 text-white rounded"
-        onSubmit={handleNameSubmit}
+        onClick={handleSubmit}
       >
         Découvrez votre pokémon !
       </button>
