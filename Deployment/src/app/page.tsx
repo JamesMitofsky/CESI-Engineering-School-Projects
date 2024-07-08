@@ -1,14 +1,13 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
+import crypto from "crypto";
 
-const hashName = (name: string) => {
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return hash;
-};
+function hashName(name: string, itemCount: number): number {
+  const hash = crypto.createHash("md5").update(name).digest("hex");
+  const numericHash = parseInt(hash, 16);
+  return numericHash % itemCount;
+}
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -16,16 +15,17 @@ export default function Home() {
 
   const handleSubmit = async () => {
     const baseUrl = "https://pokeapi.co/api/v2/pokemon";
-    // const urlBasedOnName = `${baseUrl}${hashName(name)}`;
-    const urlBasedOnName = `${baseUrl}/123`;
+    const urlWithHash = `${baseUrl}/${hashName(name, 30)}`;
 
-    const res = await fetch(urlBasedOnName)
+    console.log(name, urlWithHash);
+
+    const res = await fetch(urlWithHash)
       .then((response) => response.json())
       .catch((error) => console.error("Error fetching data:", error));
 
     setPokemonImageUrl(res.sprites.front_default);
 
-    console.log(res);
+    // console.log(res);
   };
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
