@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import crypto from "crypto";
 import { Spinner } from "@/components/spinner";
+import { Pokemon } from "pokenode-ts";
 
 function hashName(name: string, limit: number): number {
   // Use MD5 hashing
@@ -34,12 +35,18 @@ export default function Home() {
 
     console.log(name, urlWithHash);
 
-    const res = await fetch(urlWithHash)
+    const res: Pokemon = await fetch(urlWithHash)
       .then((response) => response.json())
       .catch((error) => console.error("Error fetching data:", error));
 
-    setPokemonImageUrl(res.sprites.front_default);
-    setIsLoading(false);
+    if (!res.sprites.front_default) {
+      console.error("No image found for this pokemon");
+      setIsLoading(false);
+      setPokemonImageUrl("");
+    } else {
+      setPokemonImageUrl(res.sprites.front_default);
+      setIsLoading(false);
+    }
   };
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
