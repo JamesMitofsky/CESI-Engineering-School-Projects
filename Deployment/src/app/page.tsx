@@ -15,7 +15,7 @@ export default function Home() {
 
   const handleSubmit = async () => {
     const baseUrl = "https://pokeapi.co/api/v2/pokemon";
-    const urlWithHash = `${baseUrl}/${hashName(name, 30)}`;
+    const urlWithHash = `${baseUrl}/${hashName(name, 850)}`;
 
     console.log(name, urlWithHash);
 
