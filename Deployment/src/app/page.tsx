@@ -61,7 +61,7 @@ export default function Home() {
       ) : pokemonImageUrl ? (
         <Image
           src={pokemonImageUrl}
-          alt="Your Image Description"
+          alt="Pokemon qui correspond à votre prénom"
           width={500}
           height={300}
         />
